@@ -5,25 +5,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
+namespace 
     abstract class Unit
     {
-        public virtual Dice Damage { get; set; }
+        public virtual IRandomProvider Damage { get; set; }
         public virtual float HP { get; set; }
         public virtual Race RaceSet { get; set; }
         public virtual Weather WeatherSet { get; set; }
 
-        public virtual Dice HitChance { get; set; }
-        public virtual Dice DeffChance { get; set; }
+        public virtual IRandomProvider HitChance { get; set; }
+        public virtual IRandomProvider DeffChance { get; set; }
         public int capacity;
 
         public virtual void Attack(Unit defender)
         {
-            defender.TakeDmg(this.Damage.Roll());
+            defender.TakeDmg(this.Damage.GiveRandom());
         }
         public virtual void Defender(Unit attack)
         {
-            attack.TakeDmg(this.Damage.Roll());
+            attack.TakeDmg(this.Damage.GiveRandom());
         }
         public virtual void TakeDmg(float dmg)
         {
@@ -33,12 +33,13 @@ using System.Threading.Tasks;
     public enum Race { lizardPeople, humans, asians }
     public enum Weather { Snow, cloudy, clear }
 
-    struct Dice
+    struct Dice:IRandomProvider
     {
         public uint scalar;
         public uint baseDice;
         public int modifier;
 
+    public int GiveRandom(){return Roll()};
         public Dice(uint scalar, uint baseDice, int modifier)
         {
             this.scalar = scalar;
@@ -69,4 +70,29 @@ using System.Threading.Tasks;
                     && this.modifier == b.modifier;
         }
     }
+struct Bag: IRandomProvider
+{
+    List<int> idk=new List<int> { 0,20,80,3,14,9,50};
+    List<int>idkCopy= new List<int>();
+    public Bag()
+    {
+
+    }
+    public int GiveRandom()
+    {
+        if(idk.coun>0)
+        { 
+            var num= idk.Random.Shared.Next(0,idk.count);
+            var num2= idk[num];
+            idkCopy.Add(idk[num]);
+            idk.Remove(idk[num]);
+            return num2;
+        }
+    }
+}
+public interface IRandomProvider
+{
+    public int GiveRandom();
+}
+
 
