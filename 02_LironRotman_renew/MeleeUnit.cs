@@ -10,11 +10,11 @@ using System.Threading.Tasks;
         public virtual float Bleed { get; set; }
         public override void Attack(Unit defender)
         {
-            defender.TakeDmg(base.Damage.Roll() * Bleed);
+            defender.TakeDmg(base.Damage.GiveRandom() * Bleed);
         }
         public override void Defender(Unit attack)
         {
-            attack.TakeDmg(base.Damage.Roll() / 4);
+            attack.TakeDmg(base.Damage.GiveRandom() / 4);
         }
     }
 
