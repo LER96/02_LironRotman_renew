@@ -11,11 +11,11 @@ using System.Threading.Tasks;
         public virtual float Range { get; set; }
         public override void Attack(Unit defender)
         {
-            defender.TakeDmg(base.Damage.Roll() * Range);
+            defender.TakeDmg(base.Damage.GiveRandom() * Range);
         }
         public override void Defender(Unit attack)
         {
-            attack.TakeDmg(base.Damage.Roll() / 4);
+            attack.TakeDmg(base.Damage.GiveRandom() / 4);
         }
 
     }

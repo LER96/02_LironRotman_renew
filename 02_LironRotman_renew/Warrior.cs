@@ -5,19 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-    sealed class Warrior : MeleeUnit
+sealed class Warrior : MeleeUnit
+{
+    public Warrior(Race race, Weather weather)
     {
-        public Warrior(Race race, Weather weather)
-        {
-            this.Damage = new Dice((uint)1, (uint)8, 3);
-            this.HitChance = new Dice((uint)1, (uint)3, 2);
-            this.DeffChance = new Dice((uint)1, (uint)6, 2);
-            this.capacity = 10;
-            this.HP = 20;
-            this.Bleed = 1.2f;
+        this.Damage = new Bag(10);
+        this.HitChance = new Bag(12);
+        this.DeffChance = new Bag(15);
+        this.capacity = 10;
+        this.HP = 20;
+        this.Bleed = 1.2f;
 
-            this.WeatherSet = weather;
-            this.RaceSet = race;
-        }
+        this.WeatherSet = weather;
+        this.RaceSet = race;
     }
+}
 

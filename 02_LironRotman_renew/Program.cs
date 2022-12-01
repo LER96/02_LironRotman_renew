@@ -38,7 +38,7 @@ void ToBattle(List<Unit> p1, List<Unit> p2)
             var warrior2 = p2[place2];
 
             //Roll cube VS Deff cube
-            if (warrior1.HitChance.Roll() > warrior2.DeffChance.Roll())
+            if (warrior1.HitChance.GiveRandom() > warrior2.DeffChance.GiveRandom())
             {
                 Console.WriteLine($"Noice! P1:{warrior1} manage to attack P2:{warrior2}");
                 warrior1.Attack(warrior2);
@@ -66,7 +66,7 @@ void ToBattle(List<Unit> p1, List<Unit> p2)
             var warrior1 = p2[place2];
             var warrior2 = p1[place1];
 
-            if (warrior1.HitChance.Roll() > warrior2.DeffChance.Roll())
+            if (warrior1.HitChance.GiveRandom() > warrior2.DeffChance.GiveRandom())
             {
                 Console.WriteLine($"Noice! P2:{warrior1} manage to attack P1:{warrior2}");
                 warrior1.Attack(warrior2);
